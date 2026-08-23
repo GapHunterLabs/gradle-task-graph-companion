@@ -1,0 +1,33 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.gradletaskgraphcompanion</id>
+    <name>Gradle Task Graph Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Tool window that visualizes the real <code>dependsOn</code>
+        graph between Gradle tasks in your project -- root project plus
+        every submodule declared in <code>settings.gradle(.kts)</code> --
+        grouped into dependency layers, with any real cycle called out in
+        its own top section, in red.</p>
+        <p>Recognizes both DSLs: Kotlin (<code>tasks.register("x") {
+        dependsOn("y") }</code>, <code>val x by tasks.registering</code>)
+        and Groovy (<code>task x(dependsOn: y)</code>,
+        <code>x.dependsOn y</code>).</p>
+        <p><b>100% static text analysis of your build files -- never a
+        real Gradle evaluation or daemon.</b> Stated honestly: v0.1 only
+        sees <i>explicit</i> <code>dependsOn</code> declarations written
+        in your build scripts, not the many implicit task orderings a
+        plugin like <code>java</code>/<code>application</code> wires up
+        internally -- a real, documented limitation, not a bug.</p>
+        <p>Free. No license nags, no telemetry, no network calls.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Task Graph"
+                    anchor="bottom"
+                    icon="/icons/toolWindow.svg"
+                    factoryClass="dev.gaphunter.gradletaskgraphcompanion.toolwindow.TaskGraphToolWindowFactory"/>
+    </extensions>
+</idea-plugin>
