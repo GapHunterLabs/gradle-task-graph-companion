@@ -18,6 +18,7 @@ import dev.gaphunter.gradletaskgraphcompanion.graph.TaskCycleDetector
 import dev.gaphunter.gradletaskgraphcompanion.model.BuildSystem
 import dev.gaphunter.gradletaskgraphcompanion.model.TaskGraph
 import dev.gaphunter.gradletaskgraphcompanion.parse.GradleTaskGraphBuilder
+import dev.gaphunter.gradletaskgraphcompanion.review.ReviewPrompt
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component
@@ -59,7 +60,13 @@ class TaskGraphToolWindow(private val project: Project, toolWindow: ToolWindow) 
 
     private fun buildToolbar(toolWindow: ToolWindow): ActionToolbar {
         val refreshAction = object : AnAction("Refresh", "Re-scan the project's build files", AllIcons.Actions.Refresh) {
-            override fun actionPerformed(e: AnActionEvent) = runAnalysis()
+            override fun actionPerformed(e: AnActionEvent) {
+                // Only an explicit Refresh click counts as real use --
+                // never the initial analysis run in init{} when the tool
+                // window first opens (that's passive, not a deliberate action).
+                ReviewPrompt.recordHit(project)
+                runAnalysis()
+            }
         }
         val group = DefaultActionGroup(refreshAction)
         val toolbar = ActionManager.getInstance()

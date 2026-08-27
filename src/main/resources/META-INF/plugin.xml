@@ -25,6 +25,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Gradle Task Graph Companion" displayType="BALLOON"/>
         <toolWindow id="Task Graph"
                     anchor="bottom"
                     icon="/icons/toolWindow.svg"
