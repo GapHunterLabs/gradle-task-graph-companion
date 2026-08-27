@@ -14,8 +14,7 @@ data class TaskCycle(val path: List<String>)
  * (white/gray/black, tracked as `UNVISITED`/`IN_STACK`/`DONE`) -- a
  * back-edge to a node still `IN_STACK` is a real cycle. Same algorithm,
  * same reasoning, as `circular-dependency-companion`'s `CycleDetector`
- * (`CONSTITUTION.md` §6: reuse a proven pattern, don't reinvent) --
- * copied rather than shared across repos because each plugin in this
+ * -- copied rather than shared across repos because each plugin in this
  * catalog is an independent Gradle project with no cross-plugin
  * dependency.
  */

@@ -8,8 +8,8 @@ data class RawTaskParseResult(val declaredTasks: Set<String>, val edges: List<Ra
 
 /**
  * Line-oriented scanner (hand-rolled, same class of technique as
- * `DockerfileParser`/`NginxLexer` -- `CONSTITUTION.md` §6) that extracts
- * task declarations and their `dependsOn` targets from the text of one
+ * `DockerfileParser`/`NginxLexer`) that extracts task declarations and
+ * their `dependsOn` targets from the text of one
  * `build.gradle`/`build.gradle.kts` file. 100% static text analysis --
  * never a real Gradle evaluation/daemon, so it only sees *explicit*
  * `dependsOn` declarations written in the build script, never the many
